@@ -16,11 +16,11 @@ const Reservation = () => {
             {/* charges */}
             <div>
             <div>
-            <h3 className="text-lg font-semibold border-b-2 border-[#5D5CFF]">Charges Summary</h3>
-            <div className="w-[420px] mt-5 bg-[#DFDFFF] border-2 border-[#5D5CFF] rounded  py-2.5 ">
+            <h3 className="text-lg  font-semibold border-b-2 border-[#5D5CFF]">Charges Summary</h3>
+            <div className="w-96 mt-5 bg-[#DFDFFF] border-2 border-[#5D5CFF] rounded  py-2.5 ">
             <div className="">
             <div className="">
-  <table className="table border-none">
+  <table className="table border-none ">
     {/* head */}
     <thead className="text-black ">
       <tr className="border-none">
