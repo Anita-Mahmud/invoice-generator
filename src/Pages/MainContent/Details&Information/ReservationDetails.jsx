@@ -27,8 +27,6 @@ const ReservationDetails = () => {
       const diffDays = Math.floor((diff / (1000 * 60 * 60 * 24)) % 7);
       const diffHours = Math.floor((diff / (1000 * 60 * 60)) % 24);
      
-      
-
       setDuration({
         weeks: diffWeeks,
         days: diffDays,
@@ -37,17 +35,22 @@ const ReservationDetails = () => {
       });
     }
   };
-
   useEffect(() => {
     calculateDuration(pickupDate, returnDate);
-  }, [pickupDate, returnDate]);
+  }, [pickupDate, returnDate,]);
+
+  const handleSubmit = ()=>{
+    setReservation({
+      rid,pickupDate,returnDate,duration,discount
+    })
+  }
   
-  const data = {
-    rid,pickupDate,returnDate,duration,discount
-  }
-  const handleSubmit=()=>{
-    setReservation(data)
-  }
+  
+
+  
+  
+  
+  
   
   
   
@@ -56,14 +59,14 @@ const ReservationDetails = () => {
             <h3 className="text-lg font-semibold border-b-2 border-[#5D5CFF]">Reservation Details</h3>
             <div className="card w-full rounded-md border-2 border-[#DFDFFF] mt-5 font-display text-sm font-light">
       <form className="card-body -mt-4" onBlur={handleSubmit}>
-        <div className="form-control">
+        <div className="form-control" >
           <label className="label">
             <span className="label-text">Reservation ID</span>
           </label>
           <input 
           
           type="text"  name="reservation_id" className="input input-bordered" 
-          onChange={(e) => setRID(e.target.value)}
+          onBlur={(e) => setRID(e.target.value)}
          required
           />
         </div>

@@ -18,6 +18,7 @@ const ProductProvider = ({ children }) => {
   const [liabilityInsurance,setLiabilityInsurance] = useState(false);
   const [rentalTax,setRentalTax] = useState(false);
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     fetch('https://exam-server-7c41747804bf.herokuapp.com/carsList')
@@ -26,9 +27,14 @@ const ProductProvider = ({ children }) => {
     setLoading(false)
   },[]);
   
+  
+  
   const carInfo = {loading, reservation,setReservation,setVehicleType, setVehicle,cars,vehicleType,setFirstName,setLastName,setEmail,setPhone,setCollisionDamage,setLiabilityInsurance,setRentalTax,collisionDamage,
     liabilityInsurance,
-    rentalTax,vehicle}
+    rentalTax,vehicle,firstName,
+    lastName,
+    email,
+    phone}
   return (
     
     <ProductContext.Provider value={carInfo}>{children}</ProductContext.Provider>

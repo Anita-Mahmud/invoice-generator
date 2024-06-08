@@ -11,6 +11,7 @@ const ChargesSummary = () => {
     const carDetails = cars.find(car=>car.model===vehicle);
     setCarDetail(carDetails);
   },[cars, vehicle, reservation])
+  
   let damage,liability,tax,totalWeekly,totalDaily,totalHourly,totalSum;
       if(collisionDamage){
         damage = 9.00
@@ -30,6 +31,7 @@ const ChargesSummary = () => {
       else{
         tax=0.00;
       }
+      
   if(carDetail&&reservation.duration)
   {
     totalWeekly = parseFloat((reservation.duration.weeks)*(carDetail.rates.weekly));
@@ -46,16 +48,7 @@ const ChargesSummary = () => {
       if (parsed > 0) {
         totalSum -= (totalSum * parsed / 100);
       }
-      
-     
-     
   } 
-  
-
-  
-
-  
-  
   
     return (
         <div>
