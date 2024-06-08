@@ -4,10 +4,18 @@ import App from './App.jsx'
 import './index.css'
 import ProductProvider from './context/ProductProvider.jsx'
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    
    <ProductProvider>
-   <App />
+  
+  
+  <App />
+ 
+ 
+   
    </ProductProvider>
+  
   </React.StrictMode>,
 )

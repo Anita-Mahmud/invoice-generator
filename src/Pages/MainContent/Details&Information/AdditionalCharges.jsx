@@ -1,6 +1,18 @@
-
+import useCar from "../../../hooks/useCar";
 
 const AdditionalCharges = () => {
+  const {collisionDamage,
+    liabilityInsurance,
+    rentalTax,setCollisionDamage,setLiabilityInsurance,setRentalTax} = useCar();
+   const handleCollison = ()=>{
+    setCollisionDamage(!collisionDamage)
+   }
+   const handleLiabilityInsurance = ()=>{
+    setLiabilityInsurance(!liabilityInsurance)
+   }
+   const handleRentalTax = ()=>{
+    setRentalTax(!rentalTax)
+   }
     return (
         <div className="mt-7">
              <h3 className="text-lg font-semibold border-b-2 border-[#5D5CFF]">Additional Charges</h3>
@@ -11,10 +23,10 @@ const AdditionalCharges = () => {
     
     <tbody className="font-normal ">
      
-      <tr className="border-none">
+      <tr className="border-none ">
         <td>
           <label>
-            <input  type="checkbox" className=" checkbox" />
+            <input onClick={handleCollison}  type="checkbox" className="checkbox" />
           </label>
         </td>
        
@@ -28,7 +40,7 @@ const AdditionalCharges = () => {
       <tr className="border-none">
         <td>
           <label>
-            <input  type="checkbox" className=" checkbox" />
+            <input onClick={handleLiabilityInsurance} type="checkbox" className=" checkbox" />
           </label>
         </td>
        
@@ -42,7 +54,7 @@ const AdditionalCharges = () => {
       <tr className="border-none">
         <td>
           <label>
-            <input  type="checkbox" className=" checkbox" />
+            <input onClick={handleRentalTax}  type="checkbox" className=" checkbox" />
           </label>
         </td>
        

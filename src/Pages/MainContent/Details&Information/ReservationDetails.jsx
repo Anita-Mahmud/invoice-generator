@@ -1,21 +1,54 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import useCar from "../../../hooks/useCar";
+
 
 
 const ReservationDetails = () => {
   const {setReservation} = useCar();
   const [rid,setRID] = useState('');
-  const [pickDate,setPickDate] = useState('');
+  const [pickupDate,setPickDate] = useState('');
   const [returnDate,setReturnDate] = useState('');
-  const [duration,setDuration] = useState('');
-  const [discount,setDiscount] = useState('');
+  const [duration, setDuration] = useState({
+    weeks: 0,
+    days: 0,
+    hours: 0,
+    
+  });
+  const [discount,setDiscount] = useState(0);
+
+  const calculateDuration = (pickupDate, returnDate) => {
+   
+    if (pickupDate && returnDate) {
+      const pickup = new Date(pickupDate);
+      const returnD = new Date(returnDate);
+
+      const diff = Math.abs(returnD - pickup);
+      const diffWeeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+      const diffDays = Math.floor((diff / (1000 * 60 * 60 * 24)) % 7);
+      const diffHours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+     
+      
+
+      setDuration({
+        weeks: diffWeeks,
+        days: diffDays,
+        hours: diffHours,
+       
+      });
+    }
+  };
+
+  useEffect(() => {
+    calculateDuration(pickupDate, returnDate);
+  }, [pickupDate, returnDate]);
   
   const data = {
-    rid,pickDate,returnDate,duration,discount
+    rid,pickupDate,returnDate,duration,discount
   }
-  const handleSubmit = ()=>{
-    setReservation(data);
+  const handleSubmit=()=>{
+    setReservation(data)
   }
+  
   
   
     return (
@@ -39,7 +72,7 @@ const ReservationDetails = () => {
             <span className="label-text">Pickup Date<span className="text-red-600">*</span></span>
           </label>
           <input 
-          onChange={(e)=>setPickDate(e.target.value)}
+           onBlur={(e)=>setPickDate(e.target.value)}
           type="datetime-local" placeholder="Select Date and Time" name="pickup_date" className="input input-bordered" required />
         </div>
         <div className="form-control">
@@ -47,26 +80,27 @@ const ReservationDetails = () => {
             <span className="label-text">Return Date<span className="text-red-600">*</span></span>
           </label>
           <input 
-          onChange={(e)=>setReturnDate(e.target.value)}
+          onBlur={(e)=>setReturnDate(e.target.value)}
           type="datetime-local" placeholder="Select Date and Time" name="return_date" className="input input-bordered" required />
         </div>
         <div className="form-control flex flex-row justify-between items-center mt-3">
          <div> <label className="label">
-            <span className="label-text">Duration</span>
+            <span className="label-text" >Duration</span>
           </label></div>
           <div>
           <input 
-          onChange={(e)=>setDuration(e.target.value)}
-          type="text" placeholder="" name="duration" className="input input-bordered" required />
+          value={`${duration.weeks}weeks ${duration.days} days ${duration.hours} hours`}
+          type="text" placeholder="" name="duration" className="input input-bordered" readOnly />
           </div>
         </div>
+      
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Discount</span>
+            <span className="label-text">Discount(%)</span>
           </label>
           <input 
           onChange={(e)=>setDiscount(e.target.value)}
-          type="text" placeholder="" name="discount" className="input input-bordered" required />
+          type="text" placeholder="" name="discount" value={discount}className="input input-bordered" />
         </div>
      
       

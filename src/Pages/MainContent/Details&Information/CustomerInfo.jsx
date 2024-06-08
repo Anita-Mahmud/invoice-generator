@@ -1,6 +1,8 @@
 
+import useCar from "../../../hooks/useCar";
 
 const CustomerInfo = () => {
+  const {setFirstName,setLastName,setEmail,setPhone} = useCar();
     return (
         <div>
              <h3 className="text-lg font-semibold border-b-2 border-[#5D5CFF]">Customer Information</h3>
@@ -10,25 +12,33 @@ const CustomerInfo = () => {
           <label className="label">
             <span className="label-text">First Name<span className="text-red-600">*</span></span>
           </label>
-          <input type="text" placeholder="" name="first_name" className="input input-bordered" required />
+          <input 
+          onChange={(e)=>setFirstName(e.target.value)}
+          type="text" placeholder="" name="first_name" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Last Name<span className="text-red-600">*</span></span>
           </label>
-          <input type="text" placeholder="" name="last_name" className="input input-bordered" required />
+          <input 
+           onChange={(e)=>setLastName(e.target.value)}
+          type="text" placeholder="" name="last_name" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email<span className="text-red-600">*</span></span>
           </label>
-          <input type="email" placeholder="" name="email" className="input input-bordered" required />
+          <input 
+           onChange={(e)=>setEmail(e.target.value)}
+          type="email" placeholder="" name="email" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Phone<span className="text-red-600">*</span></span>
           </label>
-          <input type="text" placeholder="" name="phone" className="input input-bordered" required />
+          <input 
+           onChange={(e)=>setPhone(e.target.value)}
+          type="text" placeholder="" name="phone" className="input input-bordered" required />
         </div>
        
         
