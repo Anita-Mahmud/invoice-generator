@@ -18,6 +18,16 @@ const ProductProvider = ({ children }) => {
   const [liabilityInsurance,setLiabilityInsurance] = useState(false);
   const [rentalTax,setRentalTax] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [carDetail,setCarDetail] = useState([]);
+  const [weekCharges,setWeekCharges] = useState({})
+  const [dayCharges,setDailyCharges] = useState({})
+  const [hourCharges,setHourCharges] = useState({})
+  const [charges,setCharges] = useState(0)
+  useEffect(()=>{
+    const carDetails = cars.find(car=>car.model===vehicle);
+    setCarDetail(carDetails);
+  
+  },[cars, vehicle, reservation])
   
 
   useEffect(() => {
@@ -28,13 +38,13 @@ const ProductProvider = ({ children }) => {
   },[]);
   
   
-  
+  console.log(charges)
   const carInfo = {loading, reservation,setReservation,setVehicleType, setVehicle,cars,vehicleType,setFirstName,setLastName,setEmail,setPhone,setCollisionDamage,setLiabilityInsurance,setRentalTax,collisionDamage,
     liabilityInsurance,
     rentalTax,vehicle,firstName,
     lastName,
     email,
-    phone}
+    phone,carDetail,setWeekCharges,setDailyCharges,setHourCharges,setCharges}
   return (
     
     <ProductContext.Provider value={carInfo}>{children}</ProductContext.Provider>

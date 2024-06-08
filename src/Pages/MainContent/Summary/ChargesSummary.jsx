@@ -3,33 +3,28 @@ import useCar from "../../../hooks/useCar";
 
 
 const ChargesSummary = () => {
-  const {reservation,vehicle,cars,collisionDamage,
+  const {reservation,carDetail,collisionDamage,
     liabilityInsurance,
-    rentalTax} = useCar();
-  const [carDetail,setCarDetail] = useState([]);
-  useEffect(()=>{
-    const carDetails = cars.find(car=>car.model===vehicle);
-    setCarDetail(carDetails);
-  },[cars, vehicle, reservation])
+    rentalTax,setWeekCharges,setDailyCharges,setHourCharges,setCharges} = useCar();
+   
   
   let damage,liability,tax,totalWeekly,totalDaily,totalHourly,totalSum;
       if(collisionDamage){
         damage = 9.00
-      }
-      else{
+      }else{
         damage = 0.00
       }
+      
       if(liabilityInsurance){
         liability = 15.00
+      }else{
+        liability=0.00
       }
-      else{
-        liability = 0.00
-      }
+     
       if(rentalTax){
         tax = 11.5
-      }
-      else{
-        tax=0.00;
+      }else{
+        tax=0.00
       }
       
   if(carDetail&&reservation.duration)
@@ -42,15 +37,43 @@ const ChargesSummary = () => {
     
     totalSum = parseFloat(totalWeekly+totalDaily+totalHourly+damage+liability+tax);
   
-
-   
       const parsed = parseFloat(reservation.discount);
-      if (parsed > 0) {
+     
         totalSum -= (totalSum * parsed / 100);
-      }
-  } 
+      
+}
+
+useEffect(()=>{
   
-    return (
+  if (carDetail && reservation.duration)
+    {
+      (reservation.duration.weeks>0)?
+        setWeekCharges({
+          unit:reservation.duration.weeks,
+          rates:carDetail.rates.weekly,
+          totalWeekly
+        }):setWeekCharges({});
+        (reservation.duration.days>0)?
+        setDailyCharges({
+          unit:reservation.duration.days,
+          rates:carDetail.rates.daily,
+          totalDaily
+        }):setDailyCharges({});
+        (reservation.duration.hour>0)?
+        setHourCharges({
+          unit:reservation.duration.hours,
+          rates:carDetail.rates.hourly,
+          totalHourly
+        }):setDailyCharges({});
+
+        setCharges(parseFloat(totalSum))
+
+      }
+},[carDetail, reservation.duration, setCharges, setDailyCharges, setHourCharges, setWeekCharges, totalDaily, totalHourly, totalSum, totalWeekly])
+
+
+
+   return (
         <div>
             <h3 className="text-lg font-semibold border-b-2 border-[#5D5CFF]">Charges Summary</h3>
             <div className="w-[420px] mt-5 bg-[#DFDFFF] border-2 border-[#5D5CFF] rounded  py-2.5 ">
@@ -74,7 +97,7 @@ const ChargesSummary = () => {
      <>
      {
       (reservation.duration.weeks>0)?
-      <tr className="border-none">
+      <tr className="border-none" >
       <td>Weekly</td>
       <td>{reservation.duration.weeks}</td>
       <td>${carDetail.rates.weekly}</td>
