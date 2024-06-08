@@ -47,24 +47,24 @@ useEffect(()=>{
   
   if (carDetail && reservation.duration)
     {
-      (reservation.duration.weeks>0)?
+      if(reservation.duration.weeks>0){
         setWeekCharges({
           unit:reservation.duration.weeks,
           rates:carDetail.rates.weekly,
           totalWeekly
-        }):setWeekCharges({});
-        (reservation.duration.days>0)?
+        })}
+       if(reservation.duration.days>0){
         setDailyCharges({
           unit:reservation.duration.days,
           rates:carDetail.rates.daily,
           totalDaily
-        }):setDailyCharges({});
-        (reservation.duration.hour>0)?
+        })}
+        if(reservation.duration.hour>0){
         setHourCharges({
           unit:reservation.duration.hours,
           rates:carDetail.rates.hourly,
           totalHourly
-        }):setDailyCharges({});
+        })}
 
         setCharges(parseFloat(totalSum))
 

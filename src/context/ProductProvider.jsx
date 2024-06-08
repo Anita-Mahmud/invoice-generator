@@ -37,6 +37,7 @@ const ProductProvider = ({ children }) => {
     setLoading(false)
   },[]);
   
+  console.log(dayCharges)
   
   console.log(charges)
   const carInfo = {loading, reservation,setReservation,setVehicleType, setVehicle,cars,vehicleType,setFirstName,setLastName,setEmail,setPhone,setCollisionDamage,setLiabilityInsurance,setRentalTax,collisionDamage,
@@ -44,7 +45,7 @@ const ProductProvider = ({ children }) => {
     rentalTax,vehicle,firstName,
     lastName,
     email,
-    phone,carDetail,setWeekCharges,setDailyCharges,setHourCharges,setCharges}
+    phone,carDetail,setWeekCharges,setDailyCharges,setHourCharges,setCharges,weekCharges,dayCharges,hourCharges,charges}
   return (
     
     <ProductContext.Provider value={carInfo}>{children}</ProductContext.Provider>
